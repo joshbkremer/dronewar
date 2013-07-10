@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="Log">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Entry" type="baseEntry"  maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="baseEntry">
+		<xs:sequence>
+			<xs:element name="BotID" type="UserID" maxOccurs="2" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="attackEntry">
+		<xs:complexContent>
+			<xs:extension base="baseEntry">
+				<xs:sequence>
+					<xs:element name="Range" type="xs:double" />
+					<xs:element name="AttackerDamage" type="atkDamage" />
+					<xs:element name="DefenderDamage" type="dfdDamage" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="moveEntry">
+		<xs:complexContent>
+			<xs:extension base="baseEntry">
+				<xs:sequence>
+					<xs:element name="Location" type="XSDPoint" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="killEntry">
+		<xs:complexContent>
+			<xs:extension base="baseEntry">
+				
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="atkDamage">
+		<xs:simpleContent>
+			<xs:extension base="xs:int">
+				<xs:attribute name="damageType" type="xs:string"/>	
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="dfdDamage">
+		<xs:simpleContent>
+			<xs:extension base="xs:int">
+				<xs:attribute name="shieldAbs" type="xs:int"/>
+				<xs:attribute name="shieldRemaining" type="xs:int"/>
+				<xs:attribute name="hpRemaining" type="xs:int"/>	
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="XSDPoint">
+		<xs:attribute name="x" type="xs:double"/>
+		<xs:attribute name="y" type="xs:double"/>
+	</xs:complexType>
+	
+	<xs:complexType name="UserID">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="type" type="userType" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="userType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ATTACK" />
+			<xs:enumeration value="DEFEND" />
+			<xs:enumeration value="MOVE" />
+			<xs:enumeration value="KILL" />
+			<xs:enumeration value="DEAD" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Drone Wars</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_start_fight">Start Fight</string>
+    <string name="title_activity_display_message">Battle Log</string>
+
+</resources>
